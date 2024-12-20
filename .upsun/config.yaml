@@ -15,10 +15,6 @@ applications:
           rules:
             static\/*:
               expires: 365d
-    mounts:
-      /dist/web/conf.d:
-        source: storage
-        source_path: config
 
     build:
       flavor: none
@@ -27,8 +23,6 @@ applications:
         set -eux
         npm i
         npm run build:draw
-      deploy: |
-        bash export-config.sh frontend
 
   awesome-project-backend:
     source:
@@ -37,10 +31,6 @@ applications:
     web:
       commands:
         start: cd dist/node && node main.js
-    mounts:
-      /dist/node/conf.d:
-        source: storage
-        source_path: config
     build:
       flavor: none
     hooks:
@@ -48,8 +38,6 @@ applications:
         set -eux
         npm i
         npm run build:node
-      deploy: |
-        bash export-config.sh backend
 
 routes:
   "https://{default}/":

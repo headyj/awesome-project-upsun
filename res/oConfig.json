@@ -1,1 +1,15 @@
-{}
+{
+    "defaultHost": "awesome-project.fluidapp.io",
+    "sc.production": true,
+    "bus": {
+        "allowGuest": true,
+        "vhost": "awesome-project"
+    },
+    "composer": {
+        "suggestedUser": "admin",
+        "sso": "manual"
+    },
+    "server": {
+        "wakeUpService": "sandman"
+    }
+}

@@ -1,1 +1,13 @@
-{}
+{
+    "defaultHost": "awesome-project.fluidapp.io",
+    "hc.app": "sc.runtime",
+    "sc.app": "0193e4584a5b3e2f475f",
+    "webservice": {
+        "port": 2015
+    },
+    "auth": {
+        "autoLogin": true,
+        "autoUser": "admin",
+        "autoPassword": "rzLZ6yDmZi8TvFVZ"
+    }
+}

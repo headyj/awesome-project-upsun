@@ -1,0 +1,62 @@
+applications:
+  awesome-project-frontend:
+    source:
+      root: "/"
+    type: "nodejs:20"
+    web:
+      locations:
+        "/":
+          root: dist/web
+          index:
+            - index.html
+          expires: 2m
+          scripts: false
+          allow: true
+          rules:
+            static\/*:
+              expires: 365d
+    mounts:
+      /dist/web/conf.d:
+        source: storage
+        source_path: config
+
+    build:
+      flavor: none
+    hooks:
+      build: |
+        set -eux
+        npm i
+        npm run build:draw
+      deploy: |
+        bash export-config.sh frontend
+
+  awesome-project-backend:
+    source:
+      root: "/"
+    type: "nodejs:20"
+    web:
+      commands:
+        start: cd dist/node && node main.js
+    mounts:
+      /dist/node/conf.d:
+        source: storage
+        source_path: config
+    build:
+      flavor: none
+    hooks:
+      build: |
+        set -eux
+        npm i
+        npm run build:node
+      deploy: |
+        bash export-config.sh backend
+
+routes:
+  "https://{default}/":
+    type: upstream
+    upstream: "awesome-project-frontend:http"
+  # A basic redirect definition
+  # More information: https://docs.upsun.com/define-routes.html#basic-redirect-definition
+  "https://www.{default}":
+    type: redirect
+    to: "https://{default}/"

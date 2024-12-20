@@ -1,6 +1,2 @@
-{
-    "defaultHost": "community.olympe.io",
-    "bus.vhost": "community",
-    "hc.app": "sc.runtime",
-    "sc.app": "<service app tag>"
-}
+{}
+
